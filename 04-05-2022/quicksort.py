@@ -1,26 +1,37 @@
 def QuickSort(arr):
-  elements = len(arr)
+  length = len(arr)
   
   #Base case
-  if elements < 2:
+  if length < 2:
       return arr
-  
-  current_position = 0 #Position of the partitioning element
 
-  for i in range(1, elements): #Partitioning loop
+  #Position of the partitioning element
+  position = 0 
+
+  #Partitioning loop
+  for i in range(1, length): 
         if arr[i] <= arr[0]:
-            current_position += 1
+            position += 1
             temp = arr[i]
-            arr[i] = arr[current_position]
-            arr[current_position] = temp
+            arr[i] = arr[position]
+            arr[position] = temp
 
   temp = arr[0]
-  arr[0] = arr[current_position] 
-  arr[current_position] = temp #Brings pivot to it's appropriate position
-  
-  left = QuickSort(arr[0:current_position]) #Sorts the elements to the left of pivot
-  right = QuickSort(arr[current_position+1:elements]) #sorts the elements to the right of pivot
+  arr[0] = arr[position] 
+  #Brings pivot to it's appropriate position
 
-  arr = left + [arr[current_position]] + right #Merging everything together
+  arr[position] = temp 
+  #Sorts the length to the left of pivot
+
+  left = QuickSort(arr[0:position]) 
+  #sorts the length to the right of pivot
+
+  right = QuickSort(arr[position+1:length])
+  #Merging everything together
+  
+  arr = left + [arr[position]] + right 
   
   return arr
+
+a = [9,8,7,6,4,5]
+print(QuickSort(a))
